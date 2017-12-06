@@ -6,16 +6,16 @@
 class Bird
 {
 private:
-	cocos2d::Size visibleSize;
-	cocos2d::Vec2 origin;
-	cocos2d::Sprite *flappyBird;
-	bool isGoingUp;
+    cocos2d::Size visibleSize;
+    cocos2d::Vec2 origin;
+    cocos2d::Sprite *flappyBird;
+    bool isGoingUp;
 
 public:
-	Bird(cocos2d::Layer *layer);
-	void fly();
-	void raise() { isGoingUp = true; };
-	void fall() { isGoingUp = false; };
+    Bird(cocos2d::Layer *layer);
+    void fly();
+    void raise() { isGoingUp = true; };
+    void fall() { isGoingUp = false; };
 };
 
 #endif // __BIRD_H__

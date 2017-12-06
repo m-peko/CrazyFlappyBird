@@ -6,13 +6,13 @@
 class Pipe
 {
 private:
-	cocos2d::Size visibleSize;
-	cocos2d::Vec2 origin;
+    cocos2d::Size visibleSize;
+    cocos2d::Vec2 origin;
 
 public:
-	Pipe();
+    Pipe();
 
-	void spawnPipe(cocos2d::Layer *layer);
+    void spawnPipe(cocos2d::Layer *layer);
 };
 
 #endif // __PIPE_H__

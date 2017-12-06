@@ -93,9 +93,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-	/* Play background theme */
-	auto backgroundThemeId = AudioEngine::play2d("sounds/theme.mp3", true);
-	AudioEngine::setVolume(backgroundThemeId, 0.2);
+    /* Play background theme */
+    auto backgroundThemeId = AudioEngine::play2d("sounds/theme.mp3", true);
+    AudioEngine::setVolume(backgroundThemeId, 0.2);
 
     // create a scene. it's an autorelease object
     auto scene = Splash::createScene();

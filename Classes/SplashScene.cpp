@@ -30,22 +30,20 @@ bool Splash::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	this->scheduleOnce(schedule_selector(Splash::goToMainMenu), DISPLAY_TIME_SPLASH_SCENE);
+    this->scheduleOnce(schedule_selector(Splash::goToMainMenu), DISPLAY_TIME_SPLASH_SCENE);
 
-	/* Create background sprite */
-	auto backgroundSprite = Sprite::create("SplashScreen.png");
-	backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    /* Create background sprite */
+    auto backgroundSprite = Sprite::create("SplashScreen.png");
+    backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
-	this->addChild(backgroundSprite);
-
-	/* Create */
+    this->addChild(backgroundSprite);
 
     return true;
 }
 
 void Splash::goToMainMenu(float displayTime)
 {
-	auto scene = MainMenu::createScene();
+    auto scene = MainMenu::createScene();
 
-	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene, Color3B(40, 47, 60)));
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene, Color3B(40, 47, 60)));
 }

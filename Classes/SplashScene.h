@@ -6,7 +6,7 @@
 class Splash : public cocos2d::Scene
 {
 private:
-	void goToMainMenu(float displayTime);
+    void goToMainMenu(float displayTime);
 
 public:
     static cocos2d::Scene* createScene();
