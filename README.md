@@ -13,6 +13,9 @@ So far, game consists of only 4 scenes:
   - Game scene
   - Game Over scene
 
+Leveling mechanism:
+  - each two pipes, i.e. obstacles, passed level increases
+
 <h2 align="center">Demo</h2>
 <p align="center">
   <img alt="Demo" src="https://github.com/m-peko/CrazyFlappyBird/blob/master/Demo.gif"/>
