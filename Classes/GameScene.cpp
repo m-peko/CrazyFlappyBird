@@ -86,6 +86,9 @@ bool Game::init()
     /* This is same as schedule() but selector is automatically set to Game::update() */
     this->scheduleUpdate();
 
+	/* Show initial level */
+	showLevel(pipe.getLevel());
+
     return true;
 }
 
@@ -119,8 +122,16 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         /* Increase the score */
         score += POINT_PASS_SCORE;
 
+		/* If user has passed 2th obstacle, increase game level */
+		if (score % 200 == 0)
+		{
+			pipe.increaseLevel();
+
+			showLevel(pipe.getLevel());
+		}
+
         /* Update score label */
-        __String *scoreStr = __String::createWithFormat("Score: %i", score);
+        auto scoreStr = __String::createWithFormat("Score: %i", score);
         scoreLabel->setString(scoreStr->getCString());
 
         /* Play sound effect */
@@ -151,4 +162,25 @@ void Game::birdFall(float dt)
 void Game::update(float dt)
 {
     bird->fly();
+}
+
+void Game::showLevel(int level)
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	/* Create level label */
+	auto levelLabel = Label::createWithTTF("LEVEL " + std::to_string(level), "fonts/TelemarinesBold.ttf", 50);
+	levelLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + levelLabel->getContentSize().height));
+
+	this->addChild(levelLabel, 10000);
+
+	/* Create fading actions */
+	auto fadeIn = FadeIn::create(1.0f);
+	auto fadeOut = FadeOut::create(1.0f);
+
+	/* Make sequence out of previous actions */
+	auto sequence = Sequence::create(fadeIn, fadeOut, nullptr);
+
+	levelLabel->runAction(sequence);
 }

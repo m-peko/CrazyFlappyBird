@@ -20,6 +20,7 @@ private:
     bool onKeyBegin(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
     void birdFall(float dt);
     void update(float dt);
+	void showLevel(int level);
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();

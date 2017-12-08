@@ -7,6 +7,7 @@ Pipe::Pipe()
 {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
+	level = 1;
 }
 
 void Pipe::spawnPipe(cocos2d::Layer *layer)
@@ -49,8 +50,8 @@ void Pipe::spawnPipe(cocos2d::Layer *layer)
     layer->addChild(topPipe);
     layer->addChild(bottomPipe);
 
-    auto topPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 2.5, 0));
-    auto bottomPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 2.5, 0));
+    auto topPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width - level, Point(-visibleSize.width * 2.5, 0));
+    auto bottomPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width - level, Point(-visibleSize.width * 2.5, 0));
 
     topPipe->runAction(topPipeAction);
     bottomPipe->runAction(bottomPipeAction);
