@@ -68,6 +68,6 @@ void Pipe::spawnPipe(cocos2d::Layer *layer)
 
     layer->addChild(pointNode);
 
-    auto pointNodeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 2.5, 0));
+    auto pointNodeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width - level, Point(-visibleSize.width * 2.5, 0));
     pointNode->runAction(pointNodeAction);
 }
