@@ -8,14 +8,11 @@ class Pipe
 private:
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
-	int level;
 
 public:
     Pipe();
 
-    void spawnPipe(cocos2d::Layer *layer);
-	void increaseLevel() { level++; };
-	int getLevel() { return level; };
+    void spawnPipe(cocos2d::Layer *layer, unsigned int level);
 };
 
 #endif // __PIPE_H__

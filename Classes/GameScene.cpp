@@ -43,6 +43,7 @@ bool Game::init()
 
     bird = new Bird(this);
     score = 0;
+	level = 1;
     
     /* Create background sprite */
     auto backgroundSprite = Sprite::create("Background.png");
@@ -73,6 +74,9 @@ bool Game::init()
     /* Schedule creating pipes */
     this->schedule(schedule_selector(Game::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);
 
+	/* Schedule creating dollars */
+	this->schedule(schedule_selector(Game::spawnDollar), DOLLAR_SPAWN_FREQUENCY * visibleSize.width);
+
     /* Create a physics contact event listener (in order to detect collision) */
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(Game::onContactBegin, this);
@@ -87,18 +91,25 @@ bool Game::init()
     this->scheduleUpdate();
 
 	/* Show initial level */
-	showLevel(pipe.getLevel());
+	showLevel(level);
 
     return true;
 }
 
 void Game::spawnPipe(float displayTime)
 {
-    pipe.spawnPipe(this);
+    pipe.spawnPipe(this, level);
+}
+
+void Game::spawnDollar(float displayTime)
+{
+	tmpDollar = dollar.spawnDollar(this, level);
 }
 
 bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
 {
+	static unsigned int pointPassed = 0;
+
     PhysicsBody *a = contact.getShapeA()->getBody();
     PhysicsBody *b = contact.getShapeB()->getBody();
 
@@ -121,13 +132,13 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
     {
         /* Increase the score */
         score += POINT_PASS_SCORE;
+		pointPassed++;
 
 		/* If user has passed 2th obstacle, increase game level */
-		if (score % 200 == 0)
+		if (pointPassed % 2 == 0)
 		{
-			pipe.increaseLevel();
-
-			showLevel(pipe.getLevel());
+			level++;
+			showLevel(level);
 		}
 
         /* Update score label */
@@ -141,6 +152,26 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         /* Shapes do not collide */
         return false;
     }
+	else if ((a->getCollisionBitmask() == BIRD_COLLISION_BITMASK && b->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK) ||
+			 (b->getCollisionBitmask() == BIRD_COLLISION_BITMASK && a->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK))
+	{
+		/* Increase the score */
+		score += DOLLAR_SCORE;
+
+		/* Update score label */
+		auto scoreStr = __String::createWithFormat("Score: %i", score);
+		scoreLabel->setString(scoreStr->getCString());
+
+		/* Play sound effect */
+		auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/dollar.mp3");
+		cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
+
+		/* Destroy dollar */
+		this->removeChild(tmpDollar, true);
+
+		/* Shapes do not collide */
+		return false;
+	}
 }
 
 bool Game::onKeyBegin(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)

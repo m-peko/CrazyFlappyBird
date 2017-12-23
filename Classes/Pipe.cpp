@@ -7,10 +7,9 @@ Pipe::Pipe()
 {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
-	level = 1;
 }
 
-void Pipe::spawnPipe(cocos2d::Layer *layer)
+void Pipe::spawnPipe(cocos2d::Layer *layer, unsigned int level)
 {
     /* Create top and bottom pipe sprites */
     auto topPipe = Sprite::create("Pipe.png");

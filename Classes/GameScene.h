@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Pipe.h"
+#include "Dollar.h"
 #include "Bird.h"
 
 class Game : public cocos2d::Layer
@@ -10,12 +11,16 @@ class Game : public cocos2d::Layer
 private:
     cocos2d::PhysicsWorld *sceneWorld;
     Pipe pipe;
+	Dollar dollar;
     Bird *bird;
     unsigned int score;
+	unsigned int level;
     cocos2d::Label *scoreLabel;
+	cocos2d::Sprite *tmpDollar;
 
     void setPhysicsWorld(cocos2d::PhysicsWorld *world) { sceneWorld = world; };
     void spawnPipe(float displayTime);
+	void spawnDollar(float displayTime);
     bool onContactBegin(cocos2d::PhysicsContact &contact);
     bool onKeyBegin(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
     void birdFall(float dt);
