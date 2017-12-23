@@ -13,8 +13,10 @@ So far, game consists of only 4 scenes:
   - Game scene
   - Game Over scene
 
-Leveling mechanism:
+Features:
   - each two pipes, i.e. obstacles, passed level increases
+  - each pipe passed, score increases by 100 points
+  - each dollar collected, score increases by 200 points
 
 <h2 align="center">Demo</h2>
 <p align="center">
