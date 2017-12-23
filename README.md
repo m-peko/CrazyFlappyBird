@@ -13,10 +13,19 @@ So far, game consists of only 4 scenes:
   - Game scene
   - Game Over scene
 
-Features:
+## Features:
   - each two pipes, i.e. obstacles, passed level increases
   - each pipe passed, score increases by 100 points
   - each dollar collected, score increases by 200 points
+
+## How to start?
+  - download latest Cocos2d-x version and extract it to a certain location
+  - enter that location and `run setup.py` from terminal
+  - run this command `cocos new CrazyFlappyBird -l cpp -d projects`
+  - replace Classes and Resources directories with same directories from this repo
+  - happy coding :)
+  
+## Feel free to contribute!!!
 
 <h2 align="center">Demo</h2>
 <p align="center">
