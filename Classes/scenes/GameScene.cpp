@@ -1,7 +1,6 @@
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "Definitions.h"
-#include "SimpleAudioEngine.h"
 #include "audio/include/AudioEngine.h"
 
 USING_NS_CC;

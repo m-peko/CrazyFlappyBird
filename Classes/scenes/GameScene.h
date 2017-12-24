@@ -2,9 +2,9 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
-#include "objects\Pipe.h"
-#include "objects\Dollar.h"
-#include "objects\Bird.h"
+#include "objects/Pipe.h"
+#include "objects/Dollar.h"
+#include "objects/Bird.h"
 
 class Game : public cocos2d::Layer
 {
