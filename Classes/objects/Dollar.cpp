@@ -32,7 +32,7 @@ cocos2d::Sprite* Dollar::spawnDollar(cocos2d::Layer *layer, unsigned int level)
     auto dollarMoveAction = MoveBy::create(DOLLAR_MOVEMENT_SPEED * visibleSize.width - level, Point(-visibleSize.width * 2.5, 0));
     dollar->runAction(dollarMoveAction);
 
-	// TODO(m-peko): Rotate sprite for 360 degrees
+    // TODO(m-peko): Rotate sprite for 360 degrees
 
-	return dollar;
+    return dollar;
 }

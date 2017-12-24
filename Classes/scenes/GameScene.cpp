@@ -43,7 +43,7 @@ bool Game::init()
 
     bird = new Bird(this);
     score = 0;
-	level = 1;
+    level = 1;
     
     /* Create background sprite */
     auto backgroundSprite = Sprite::create("Background.png");
@@ -74,8 +74,8 @@ bool Game::init()
     /* Schedule creating pipes */
     this->schedule(schedule_selector(Game::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);
 
-	/* Schedule creating dollars */
-	this->schedule(schedule_selector(Game::spawnDollar), DOLLAR_SPAWN_FREQUENCY * visibleSize.width);
+    /* Schedule creating dollars */
+    this->schedule(schedule_selector(Game::spawnDollar), DOLLAR_SPAWN_FREQUENCY * visibleSize.width);
 
     /* Create a physics contact event listener (in order to detect collision) */
     auto contactListener = EventListenerPhysicsContact::create();
@@ -90,8 +90,8 @@ bool Game::init()
     /* This is same as schedule() but selector is automatically set to Game::update() */
     this->scheduleUpdate();
 
-	/* Show initial level */
-	showLevel(level);
+    /* Show initial level */
+    showLevel(level);
 
     return true;
 }
@@ -103,12 +103,12 @@ void Game::spawnPipe(float displayTime)
 
 void Game::spawnDollar(float displayTime)
 {
-	tmpDollar = dollar.spawnDollar(this, level);
+    tmpDollar = dollar.spawnDollar(this, level);
 }
 
 bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
 {
-	static unsigned int pointPassed = 0;
+    static unsigned int pointPassed = 0;
 
     PhysicsBody *a = contact.getShapeA()->getBody();
     PhysicsBody *b = contact.getShapeB()->getBody();
@@ -132,14 +132,14 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
     {
         /* Increase the score */
         score += POINT_PASS_SCORE;
-		pointPassed++;
+        pointPassed++;
 
-		/* If user has passed 2th obstacle, increase game level */
-		if (pointPassed % 2 == 0)
-		{
-			level++;
-			showLevel(level);
-		}
+        /* If user has passed 2th obstacle, increase game level */
+        if (pointPassed % 2 == 0)
+        {
+            level++;
+            showLevel(level);
+        }
 
         /* Update score label */
         auto scoreStr = __String::createWithFormat("Score: %i", score);
@@ -152,26 +152,26 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         /* Shapes do not collide */
         return false;
     }
-	else if ((a->getCollisionBitmask() == BIRD_COLLISION_BITMASK && b->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK) ||
-			 (b->getCollisionBitmask() == BIRD_COLLISION_BITMASK && a->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK))
-	{
-		/* Increase the score */
-		score += DOLLAR_SCORE;
+    else if ((a->getCollisionBitmask() == BIRD_COLLISION_BITMASK && b->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK) ||
+             (b->getCollisionBitmask() == BIRD_COLLISION_BITMASK && a->getCollisionBitmask() == DOLLAR_COLLISION_BITMASK))
+    {
+        /* Increase the score */
+        score += DOLLAR_SCORE;
 
-		/* Update score label */
-		auto scoreStr = __String::createWithFormat("Score: %i", score);
-		scoreLabel->setString(scoreStr->getCString());
+        /* Update score label */
+        auto scoreStr = __String::createWithFormat("Score: %i", score);
+        scoreLabel->setString(scoreStr->getCString());
 
-		/* Play sound effect */
-		auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/dollar.mp3");
-		cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
+        /* Play sound effect */
+        auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/dollar.mp3");
+        cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
 
-		/* Destroy dollar */
-		this->removeChild(tmpDollar, true);
+        /* Remove dollar */
+        this->removeChild(tmpDollar, true);
 
-		/* Shapes do not collide */
-		return false;
-	}
+        /* Shapes do not collide */
+        return false;
+    }
 }
 
 bool Game::onKeyBegin(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
@@ -197,21 +197,21 @@ void Game::update(float dt)
 
 void Game::showLevel(int level)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/* Create level label */
-	auto levelLabel = Label::createWithTTF("LEVEL " + std::to_string(level), "fonts/TelemarinesBold.ttf", 50);
-	levelLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + levelLabel->getContentSize().height));
+    /* Create level label */
+    auto levelLabel = Label::createWithTTF("LEVEL " + std::to_string(level), "fonts/TelemarinesBold.ttf", 50);
+    levelLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + levelLabel->getContentSize().height));
 
-	this->addChild(levelLabel, 10000);
+    this->addChild(levelLabel, 10000);
 
-	/* Create fading actions */
-	auto fadeIn = FadeIn::create(1.0f);
-	auto fadeOut = FadeOut::create(1.0f);
+    /* Create fading actions */
+    auto fadeIn = FadeIn::create(1.0f);
+    auto fadeOut = FadeOut::create(1.0f);
 
-	/* Make sequence out of previous actions */
-	auto sequence = Sequence::create(fadeIn, fadeOut, nullptr);
+    /* Make sequence out of previous actions */
+    auto sequence = Sequence::create(fadeIn, fadeOut, nullptr);
 
-	levelLabel->runAction(sequence);
+    levelLabel->runAction(sequence);
 }
