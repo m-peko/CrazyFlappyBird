@@ -1,8 +1,7 @@
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "Definitions.h"
-#include "SimpleAudioEngine.h"
-#include "audio/include/AudioEngine.h"
+#include "utils/AudioManager.h"
 #include "ui/CocosGUI.h"
 
 USING_NS_CC;
@@ -64,10 +63,10 @@ bool MainMenu::init()
         switch (type)
         {
         case cocos2d::ui::CheckBox::EventType::SELECTED:
-            cocos2d::experimental::AudioEngine::pauseAll();
+            AudioManager::muteSounds();
             break;
         case cocos2d::ui::CheckBox::EventType::UNSELECTED:
-            cocos2d::experimental::AudioEngine::resumeAll();
+            AudioManager::unmuteSounds();
             break;
         default:
             break;
