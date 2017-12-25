@@ -57,6 +57,8 @@ bool MainMenu::init()
     auto soundCheckBox = ui::CheckBox::create("SoundButton.png", "SoundButtonChecked.png");
     soundCheckBox->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y - playItem->getContentSize().height * 1.4));
     
+    soundCheckBox->setSelected(!AudioManager::getSoundState());
+
     this->addChild(soundCheckBox);
 
     soundCheckBox->addEventListener([](Ref *sender, ui::CheckBox::EventType type){

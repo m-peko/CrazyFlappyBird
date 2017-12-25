@@ -11,6 +11,7 @@ private:
     AudioManager() {}
 
 public:
+    static bool getSoundState() { return soundEnabled; };
     static void muteSounds();
     static void unmuteSounds();
     static void playBackgroundMusic(const std::string& filePath, bool loop = true, float volume = 1.0);
