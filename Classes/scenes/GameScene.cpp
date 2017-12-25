@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "Definitions.h"
-#include "audio/include/AudioEngine.h"
+#include "utils/AudioManager.h"
 
 USING_NS_CC;
 
@@ -119,9 +119,7 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         auto scene = GameOver::createScene(score);
         Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene, Color3B(40, 47, 60)));
 
-        /* Play sound effect */
-        auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/smash.mp3");
-        cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
+        AudioManager::playSoundEffect("sounds/smash.mp3", 0.5);
 
         /* Shapes collide */
         return true;
@@ -144,9 +142,7 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         auto scoreStr = __String::createWithFormat("Score: %i", score);
         scoreLabel->setString(scoreStr->getCString());
 
-        /* Play sound effect */
-        auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/point.mp3");
-        cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
+        AudioManager::playSoundEffect("sounds/point.mp3", 0.5);
 
         /* Shapes do not collide */
         return false;
@@ -161,9 +157,7 @@ bool Game::onContactBegin(cocos2d::PhysicsContact &contact)
         auto scoreStr = __String::createWithFormat("Score: %i", score);
         scoreLabel->setString(scoreStr->getCString());
 
-        /* Play sound effect */
-        auto soundId = cocos2d::experimental::AudioEngine::play2d("sounds/dollar.mp3");
-        cocos2d::experimental::AudioEngine::setVolume(soundId, 0.5);
+        AudioManager::playSoundEffect("sounds/dollar.mp3", 0.5);
 
         /* Remove dollar */
         this->removeChild(tmpDollar, true);
