@@ -31,3 +31,9 @@ So far, game consists of only 4 scenes:
 <p align="center">
   <img alt="Demo" src="https://github.com/m-peko/CrazyFlappyBird/blob/master/Demo.gif"/>
 </p>
+
+## Support
+
+If you like the work `CrazyFlappyBird` library is doing, please consider supporting it:
+
+<a href="https://www.buymeacoffee.com/mpeko" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
